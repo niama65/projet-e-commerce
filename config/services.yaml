@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+
+    App\Service\CartServiceInterface:
+        alias: App\Service\CartService
+
+    App\Service\UserServiceInterface:
+        alias: App\Service\UserService
+
+    App\Repository\ProductRepositoryInterface:
+        alias: App\Repository\ProductRepository
+
+    App\Repository\UserRepositoryInterface:
+        alias: App\Repository\UserRepository

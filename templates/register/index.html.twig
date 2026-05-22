@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Créer un compte</h2>
+                </div>
+
+                <div class="card-body p-4">
+                    {{ form_start(registerForm) }}
+
+                        {{ form_row(registerForm.nom, {
+                            attr: {'class': 'form-control'}
+                        }) }}
+
+                        {{ form_row(registerForm.prenom, {
+                            attr: {'class': 'form-control'}
+                        }) }}
+
+                        {{ form_row(registerForm.email, {
+                            attr: {'class': 'form-control'}
+                        }) }}
+
+                        {% for passwordField in registerForm.password %}
+                            {{ form_row(passwordField, {
+                                attr: {'class': 'form-control'}
+                            }) }}
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-success w-100 mt-3">
+                            S'inscrire
+                        </button>
+
+                    {{ form_end(registerForm) }}
+
+                    <div class="text-center mt-3">
+                        <a href="{{ path('app_login') }}">
+                            Déjà un compte ? Se connecter
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
