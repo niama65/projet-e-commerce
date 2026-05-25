@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
+#[ORM\Entity]
+#[ORM\Table(name: 'user')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -44,6 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
         return $this;
     }
 
@@ -55,6 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
         return $this;
     }
 
@@ -66,6 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -77,6 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
+
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -85,6 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
         return $this;
     }
 
@@ -96,6 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
         return $this;
     }
 

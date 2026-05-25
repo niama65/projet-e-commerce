@@ -6,16 +6,13 @@ use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Category>
- */
-class CategoryRepository extends ServiceEntityRepository
+class CategoryRepository extends ServiceEntityRepository implements CategoryRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
     }
-    // récupérer toutes les catégories
+
     public function findAllCategories(): array
     {
         return $this->createQueryBuilder('c')

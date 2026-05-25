@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cart;
+namespace App\Service\Cart;
 
 use App\Entity\Cart;
 use App\Entity\CartItem;
@@ -15,44 +15,44 @@ class SessionCart implements CartInterface
     ) {}
 
     public function add(CartItem $item, Cart $cart): Cart
-{
-    $session = $this->requestStack->getSession();
+    {
+        $session = $this->requestStack->getSession();
 
-    $items = $session->get('cart_items', []);
+        $items = $session->get('cart_items', []);
 
-    $items[] = [
-        'product_id' => $item->getProduct()->getId(),
-        'quantity' => $item->getQuantity(),
-        'price' => $item->getPrice(),
-    ];
+        $items[] = [
+            'product_id' => $item->getProduct()->getId(),
+            'quantity' => $item->getQuantity(),
+            'price' => $item->getPrice(),
+        ];
 
-    $session->set('cart_items', $items);
+        $session->set('cart_items', $items);
 
-    #dd($session->get('cart_items'));
-
-    return $this->getCart('cart_items');
-}
-public function remove(CartItem $item, Cart $cart): Cart
-{
-    $this->removeByProductId($item->getProduct()->getId());
-
-    return $this->getCart('cart_items');
-}
-    public function removeByProductId(int $productId): void
-{
-    $session = $this->requestStack->getSession();
-
-    $items = $session->get('cart_items', []);
-
-    foreach ($items as $key => $item) {
-        if ($item['product_id'] == $productId) {
-            unset($items[$key]);
-            break;
-        }
+        return $this->getCart('cart_items');
     }
 
-    $session->set('cart_items', array_values($items));
-}
+    public function remove(CartItem $item, Cart $cart): Cart
+    {
+        $this->removeByProductId($item->getProduct()->getId());
+
+        return $this->getCart('cart_items');
+    }
+
+    public function removeByProductId(int $productId): void
+    {
+        $session = $this->requestStack->getSession();
+
+        $items = $session->get('cart_items', []);
+
+        foreach ($items as $key => $item) {
+            if ($item['product_id'] == $productId) {
+                unset($items[$key]);
+                break;
+            }
+        }
+
+        $session->set('cart_items', array_values($items));
+    }
 
     public function getCart(string $identifier): Cart
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cart;
+namespace App\Service\Cart;
 
 use App\Entity\Cart;
 use App\Entity\CartItem;
@@ -25,5 +25,10 @@ class ApiCart implements CartInterface
     public function clearCart(string $identifier): void
     {
         dd('ApiCart clearCart');
+    }
+
+    public function removeByProductId(int $productId): void
+    {
+        dd('ApiCart removeByProductId');
     }
 }

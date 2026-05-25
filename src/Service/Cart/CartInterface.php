@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cart;
+namespace App\Service\Cart;
 
 use App\Entity\Cart;
 use App\Entity\CartItem;
@@ -14,4 +14,6 @@ interface CartInterface
     public function getCart(string $identifier): Cart;
 
     public function clearCart(string $identifier): void;
+
+    public function removeByProductId(int $productId): void;
 }
